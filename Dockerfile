@@ -19,10 +19,11 @@ RUN apt-get update && \
 	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C && \
 	apt-get install -y software-properties-common && \
 	NGINX=stable && \
-	add-apt-repository ppa:nginx/${NGINX_VERSION} && \
+	add-apt-repository ppa:nginx/${NGINX_VERSION} && \	
 	add-apt-repository ppa:ondrej/php && \
 	apt-get update && \
 	apt-get upgrade -y && \
+	apt-get install -y gnupg gnupg1 gnupg2 && \
 	BUILD_PACKAGES="supervisor nginx php5.6-fpm git php5.6-mysql php5.6-zip php5.6-json php-apc php5.6-curl php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-memcache php5.6-memcached php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-pgsql php5.6-mongo php5.6-ldap pwgen php5.6-cli curl memcached ssmtp" && \
 	apt-get -y install $BUILD_PACKAGES && \
 	apt-get remove --purge -y software-properties-common && \
@@ -55,8 +56,8 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/5.6/fpm/php.
 	sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" /etc/php/5.6/fpm/pool.d/www.conf && \
 	sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" /etc/php/5.6/fpm/pool.d/www.conf && \
 	sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" /etc/php/5.6/fpm/pool.d/www.conf && \
-	sed -i "s/;date.timezone =.*/date.timezone = Europe\/Vilnius/" /etc/php/5.6/fpm/php.ini && \
-	sed -i "s/;date.timezone =.*/date.timezone = Europe\/Vilnius/" /etc/php/5.6/cli/php.ini
+	sed -i "s/;date.timezone =.*/date.timezone = America\/Sao_Paulo/" /etc/php/5.6/fpm/php.ini && \
+	sed -i "s/;date.timezone =.*/date.timezone = America\/Sao_Paulo/" /etc/php/5.6/cli/php.ini
 
 # Ownership of sock file for PHP-FPM
 RUN sed -i -e "s/;listen.mode = 0660/listen.mode = 0750/g" /etc/php/5.6/fpm/pool.d/www.conf && \
