@@ -1,8 +1,8 @@
-FROM ubuntu:14.04.5
+FROM vialink/vlk-ubuntu
 
-MAINTAINER Donatas Navidonskis <donatas@navidonskis.com>
+MAINTAINER Mauricio Nunes <mnunes@vialink.com.br>
 
-ENV DEFAULT_LOCALE=en_US \
+ENV DEFAULT_LOCALE=pt_BR \
 	NGINX_VERSION=stable
 
 # let the container know that there is no tty
@@ -87,6 +87,6 @@ RUN rm -f /etc/nginx/sites-enabled/default && \
 	touch /etc/cron.d/crontasks
 
 # Expose Ports
-EXPOSE 80
+EXPOSE 80 443
 
 ENTRYPOINT ["/bin/bash", "/cmd.sh"]
